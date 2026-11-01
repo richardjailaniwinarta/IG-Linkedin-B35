@@ -143,6 +143,64 @@
       width:100%;position:static;
       flex-direction:row;flex-wrap:wrap;
     }
+<<<<<<< HEAD
+=======
+    .roster-count{display:block;margin-bottom:8px;font-size:12px;}
+    .toolbar{width:100%;}
+    .search-box{flex:1;min-width:0;height:44px;font-size:16px;}
+    .filter-btn{
+      display:inline-flex;align-items:center;gap:6px;flex:none;max-width:45%;
+      height:44px;padding:0 12px;
+      font-family:'IBM Plex Mono',monospace;font-size:13px;
+      background:#fff;border:2px solid var(--ink);border-radius:2px;color:var(--ink);cursor:pointer;
+    }
+    .filter-btn span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+    .filter-btn.on{background:var(--ink);color:var(--paper);}
+
+    .group-sidebar{display:none;}
+    .home-layout{display:block;}
+
+    .grid{border:none;background:transparent;box-shadow:none;gap:12px;overflow:visible;}
+    .card{
+      border:2px solid var(--ink);border-radius:10px;
+      padding:14px;gap:12px;box-shadow:var(--card-shadow);
+    }
+    .card:last-child{border-bottom:2px solid var(--ink);}
+    .card-main{flex:1 1 0;}
+    .card-name{font-size:18px;margin-bottom:6px;}
+    .card-batch{margin:0 4px 4px 0 !important;}
+    .card-links{flex:1 1 100%;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:10px;}
+    .social-btn{justify-content:center;min-height:44px;font-size:14px;padding:10px;border-radius:10px;}
+    .social-btn svg{width:18px;height:18px;}
+    .card-links:has(.social-btn:nth-child(3)){gap:6px;}
+    .card-links:has(.social-btn:nth-child(3)) .social-btn{font-size:12.5px;padding:10px 6px;gap:5px;}
+    .card-links:has(.social-btn:nth-child(3)) .social-btn svg{width:16px;height:16px;}
+
+    .sheet-overlay{
+      display:block;position:fixed;inset:0;z-index:40;
+      background:rgba(27,27,24,.5);opacity:0;visibility:hidden;
+      transition:opacity .2s ease,visibility .2s;
+    }
+    .sheet{
+      display:block;position:fixed;left:0;right:0;bottom:0;z-index:41;
+      background:var(--paper);border-top:2px solid var(--ink);
+      border-radius:18px 18px 0 0;padding:10px 16px calc(16px + env(safe-area-inset-bottom));
+      transform:translateY(100%);visibility:hidden;
+      transition:transform .25s ease,visibility .25s;
+      max-height:80vh;
+    }
+    .sheet-handle{width:40px;height:4px;border-radius:2px;background:var(--line);margin:0 auto 12px;}
+    .sheet-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+    .sheet-title{font-family:'Fraunces',serif;font-weight:600;font-size:20px;margin:0;}
+    .sheet-close{
+      font-family:'IBM Plex Mono',monospace;font-size:13px;height:40px;padding:0 12px;
+      background:transparent;border:2px solid var(--ink);border-radius:2px;color:var(--ink);cursor:pointer;
+    }
+    .sheet-body{max-height:calc(80vh - 110px);overflow-y:auto;-webkit-overflow-scrolling:touch;}
+    body.sheet-open{overflow:hidden;}
+    body.sheet-open .sheet-overlay{opacity:1;visibility:visible;}
+    body.sheet-open .sheet{transform:translateY(0);visibility:visible;}
+>>>>>>> 7ea0abf01d1c0e059213e514a2d679802d4a725b
   }
 
   .card{
@@ -202,6 +260,9 @@
   }
   .social-btn.li{
     background:#0A66C2;
+  }
+  .social-btn.pf{
+    background:var(--teal);
   }
   .ico{width:15px;height:15px;flex:none;opacity:.75;}
   .empty-state{
@@ -427,6 +488,13 @@
           <small class="field-error" id="linkedinError">Link LinkedIn tidak valid. Contoh yang benar: https://linkedin.com/in/username</small>
         </div>
 
+        <div class="field">
+          <label>Link Portfolio</label>
+          <input type="url" id="portfolio" placeholder="https://portfolio-anda.com">
+          <small class="hint">Format harus diawali https:// (contoh: Google Drive, Notion, Behance, GitHub, website pribadi)</small>
+          <small class="field-error" id="portfolioError">Link Portfolio tidak valid. Contoh yang benar: https://portfolio-anda.com</small>
+        </div>
+
         <button type="submit" class="submit-btn" id="submitBtn">Simpan Data</button>
         <div class="status-msg" id="statusMsg"></div>
       </form>
@@ -440,7 +508,7 @@
 <script>
 /* =========================================================
    ========================================================= */
-const _k = "aHR0cHM6Ly9zY3JpcHQuZ29vZ2xlLmNvbS9tYWNyb3Mvcy9BS2Z5Y2J4cm1BMEhPSlR5cC13T2JiUlUxbnVmeVRlSWRiM0pYSjRrWWcxTFM4ZjJqNUxDTkFtMjQydjVZbnNRNTBndkhoR1gvZXhlYw==";
+const _k = "aHR0cHM6Ly9zY3JpcHQuZ29vZ2xlLmNvbS9tYWNyb3Mvcy9BS2Z5Y2J6SmVTdy01U0o5X1huVDFYMTI3MHRnVnJKSHZsd3ozaUgyUGtfTnloR0tsbEU4YzFkMlBSQURPeS05YVdVTC16eFZFdy9leGVj";
 const _ep = atob(_k);
 
 /* ---------------- Tabs ---------------- */
@@ -458,6 +526,8 @@ const instagramInput = document.getElementById("instagram");
 const linkedinInput = document.getElementById("linkedin");
 const instagramError = document.getElementById("instagramError");
 const linkedinError = document.getElementById("linkedinError");
+const portfolioInput = document.getElementById("portfolio");
+const portfolioError = document.getElementById("portfolioError");
 const smallGroupInput = document.getElementById("smallGroup");
 const smallGroupError = document.getElementById("smallGroupError");
 
@@ -465,6 +535,8 @@ const smallGroupError = document.getElementById("smallGroupError");
 const INSTAGRAM_REGEX = /^https?:\/\/(www\.)?instagram\.com\/[a-zA-Z0-9._]{1,30}\/?$/;
 // Harus format: https://linkedin.com/in/username atau https://www.linkedin.com/in/username
 const LINKEDIN_REGEX = /^https?:\/\/(www\.)?linkedin\.com\/in\/[a-zA-Z0-9\-_%]{3,100}\/?$/;
+// Portfolio bebas platform, yang penting link http(s) dengan domain yang valid
+const PORTFOLIO_REGEX = /^https?:\/\/[^\s\/$.?#][^\s]*\.[^\s]{2,}$/i;
 
 function setFieldError(input, errorEl, isInvalid){
   input.classList.toggle("invalid", isInvalid);
@@ -484,6 +556,12 @@ function validateLinkedin(){
   setFieldError(linkedinInput, linkedinError, invalid);
   return !invalid;
 }
+function validatePortfolio(){
+  const val = portfolioInput.value.trim();
+  const invalid = val !== "" && !PORTFOLIO_REGEX.test(val);
+  setFieldError(portfolioInput, portfolioError, invalid);
+  return !invalid;
+}
 function validateSmallGroup(){
   const val = smallGroupInput.value.trim();
   const invalid = val === "";
@@ -494,6 +572,7 @@ function validateSmallGroup(){
 // 
 instagramInput.addEventListener("blur", validateInstagram);
 linkedinInput.addEventListener("blur", validateLinkedin);
+portfolioInput.addEventListener("blur", validatePortfolio);
 smallGroupInput.addEventListener("change", validateSmallGroup);
 smallGroupInput.addEventListener("blur", validateSmallGroup);
 
@@ -510,17 +589,19 @@ form.addEventListener("submit", async (e)=>{
   const sgOk = validateSmallGroup();
   const igOk = validateInstagram();
   const liOk = validateLinkedin();
+  const pfOk = validatePortfolio();
   if(!sgOk){
     statusMsg.textContent = "SMALL GROUP WAJIB DI ISI !!!, Tanyakan SA Anda jika belum tahu Small Group Berapa";
     statusMsg.className = "status-msg err";
     smallGroupInput.focus();
     return;
   }
-  if(!igOk || !liOk){
+  if(!igOk || !liOk || !pfOk){
     statusMsg.textContent = "Ada format link yang belum sesuai. Perbaiki dulu link yang ditandai merah di atas.";
     statusMsg.className = "status-msg err";
     if(!igOk) instagramInput.focus();
-    else linkedinInput.focus();
+    else if(!liOk) linkedinInput.focus();
+    else portfolioInput.focus();
     return;
   }
 
@@ -532,6 +613,7 @@ form.addEventListener("submit", async (e)=>{
     batch: document.getElementById("batch").value.trim(),
     instagram: document.getElementById("instagram").value.trim(),
     linkedin: document.getElementById("linkedin").value.trim(),
+    portfolio: portfolioInput.value.trim(),
     smallGroup: document.getElementById("smallGroup").value.trim()
   };
 
@@ -550,6 +632,7 @@ form.addEventListener("submit", async (e)=>{
       form.reset();
       setFieldError(instagramInput, instagramError, false);
       setFieldError(linkedinInput, linkedinError, false);
+      setFieldError(portfolioInput, portfolioError, false);
       setFieldError(smallGroupInput, smallGroupError, false);
       loadRoster();
     } else {
@@ -614,6 +697,10 @@ function getSmallGroup(s){
 }
 function getInstagram(s){ return pickField(s, ["Instagram","instagram"]); }
 function getLinkedIn(s){ return pickField(s, ["LinkedIn","Linkedin","linkedin"]); }
+function getPortfolio(s){
+  const url = pickField(s, ["Portfolio","portfolio"]);
+  return /^https?:\/\//i.test(url) ? url : ""; // hanya render link http(s)
+}
 
 function renderRoster(list, searchQuery){
   if(!list.length){
@@ -629,6 +716,7 @@ function renderRoster(list, searchQuery){
     const smallGroup = getSmallGroup(s);
     const instagram = getInstagram(s);
     const linkedin = getLinkedIn(s);
+    const portfolio = getPortfolio(s);
     return `
     <div class="card">
       <div class="card-avatar">${initial(nama)}</div>
@@ -640,6 +728,7 @@ function renderRoster(list, searchQuery){
       <div class="card-links">
         ${instagram ? `<a class="social-btn ig" href="${instagram}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="20" height="20" rx="5.5" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="2"/><circle cx="17.4" cy="6.6" r="1.2" fill="currentColor"/></svg>Instagram</a>` : ""}
         ${linkedin ? `<a class="social-btn li" href="${linkedin}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="20" height="20" rx="3" fill="currentColor" fill-opacity="0"/><path d="M6.94 8.5a1.94 1.94 0 1 0 0-3.88 1.94 1.94 0 0 0 0 3.88Z" fill="currentColor"/><path d="M4.75 10.25h4.38V19H4.75v-8.75ZM12.06 10.25h4.2v1.2h.06c.58-1.05 2-2.16 4.12-2.16 4.4 0 5.22 2.75 5.22 6.33V19h-4.38v-4.9c0-1.17-.02-2.68-1.68-2.68-1.69 0-1.95 1.28-1.95 2.6V19h-4.38v-8.75Z" fill="currentColor"/></svg>LinkedIn</a>` : ""}
+        ${portfolio ? `<a class="social-btn pf" href="${escapeHtml(portfolio)}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="7" width="18" height="13" rx="2" stroke="currentColor" stroke-width="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" stroke="currentColor" stroke-width="2"/><path d="M3 12.5h18" stroke="currentColor" stroke-width="2"/></svg>Portfolio</a>` : ""}
       </div>
     </div>
   `;}).join("");

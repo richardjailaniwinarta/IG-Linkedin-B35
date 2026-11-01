@@ -137,88 +137,12 @@
   .group-btn.active{background:var(--ink);color:var(--paper);border-color:var(--ink);}
   .home-content{flex:1;min-width:0;}
 
-  .toolbar{display:flex;gap:8px;align-items:center;}
-  .filter-btn,.sheet,.sheet-overlay{display:none;}
-
-  /* ---- Bottom sheet filter (mobile) ---- */
-  .sheet-chip{
-    font-family:'IBM Plex Mono',monospace;font-size:13px;
-    min-width:44px;height:40px;padding:0 12px;
-    background:#fff;border:1.5px solid var(--line);color:var(--ink);
-    border-radius:20px;cursor:pointer;
-  }
-  .sheet-chip.active{background:var(--ink);color:var(--paper);border-color:var(--ink);}
-  .sheet-row{padding:10px 0;border-top:1px solid var(--line);}
-  .sheet-row:first-child{border-top:none;padding-top:0;}
-  .sheet-name{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--navy-2);font-weight:600;margin-bottom:8px;}
-  .sheet-chips{display:flex;flex-wrap:wrap;gap:8px;}
-
   @media (max-width: 720px){
-    .wrap{padding:0 14px 60px;}
-    header.top{position:static;padding:18px 14px 14px;}
-    header.top .inner{align-items:center;gap:12px;}
-    .brand-eyebrow{font-size:10px;margin-bottom:4px;}
-    .brand-title{font-size:28px;}
-    .tab-btn{padding:8px 12px;font-size:12px;}
-
-    .roster-meta{
-      display:block;margin:0 -14px 14px;padding:12px 14px;
-      position:sticky;top:0;z-index:15;
-      background:var(--paper);border-bottom:2px solid var(--ink);
+    .home-layout{flex-direction:column;}
+    .group-sidebar{
+      width:100%;position:static;
+      flex-direction:row;flex-wrap:wrap;
     }
-    .roster-count{display:block;margin-bottom:8px;font-size:12px;}
-    .toolbar{width:100%;}
-    .search-box{flex:1;min-width:0;height:44px;font-size:16px;}
-    .filter-btn{
-      display:inline-flex;align-items:center;gap:6px;flex:none;max-width:45%;
-      height:44px;padding:0 12px;
-      font-family:'IBM Plex Mono',monospace;font-size:13px;
-      background:#fff;border:2px solid var(--ink);border-radius:2px;color:var(--ink);cursor:pointer;
-    }
-    .filter-btn span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-    .filter-btn.on{background:var(--ink);color:var(--paper);}
-
-    .group-sidebar{display:none;}
-    .home-layout{display:block;}
-
-    .grid{border:none;background:transparent;box-shadow:none;gap:12px;overflow:visible;}
-    .card{
-      border:2px solid var(--ink);border-radius:10px;
-      padding:14px;gap:12px;box-shadow:var(--card-shadow);
-    }
-    .card:last-child{border-bottom:2px solid var(--ink);}
-    .card-main{flex:1 1 0;}
-    .card-name{font-size:18px;margin-bottom:6px;}
-    .card-batch{margin:0 4px 4px 0 !important;}
-    .card-links{flex:1 1 100%;display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-    .social-btn{justify-content:center;min-height:44px;font-size:14px;padding:10px;border-radius:10px;}
-    .social-btn svg{width:18px;height:18px;}
-    .card-links:has(.social-btn:only-child){grid-template-columns:1fr;}
-
-    .sheet-overlay{
-      display:block;position:fixed;inset:0;z-index:40;
-      background:rgba(27,27,24,.5);opacity:0;visibility:hidden;
-      transition:opacity .2s ease,visibility .2s;
-    }
-    .sheet{
-      display:block;position:fixed;left:0;right:0;bottom:0;z-index:41;
-      background:var(--paper);border-top:2px solid var(--ink);
-      border-radius:18px 18px 0 0;padding:10px 16px calc(16px + env(safe-area-inset-bottom));
-      transform:translateY(100%);visibility:hidden;
-      transition:transform .25s ease,visibility .25s;
-      max-height:80vh;
-    }
-    .sheet-handle{width:40px;height:4px;border-radius:2px;background:var(--line);margin:0 auto 12px;}
-    .sheet-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
-    .sheet-title{font-family:'Fraunces',serif;font-weight:600;font-size:20px;margin:0;}
-    .sheet-close{
-      font-family:'IBM Plex Mono',monospace;font-size:13px;height:40px;padding:0 12px;
-      background:transparent;border:2px solid var(--ink);border-radius:2px;color:var(--ink);cursor:pointer;
-    }
-    .sheet-body{max-height:calc(80vh - 110px);overflow-y:auto;-webkit-overflow-scrolling:touch;}
-    body.sheet-open{overflow:hidden;}
-    body.sheet-open .sheet-overlay{opacity:1;visibility:visible;}
-    body.sheet-open .sheet{transform:translateY(0);visibility:visible;}
   }
 
   .card{
@@ -365,13 +289,7 @@
   <section id="home" class="active">
     <div class="roster-meta">
       <span class="roster-count" id="rosterCount">Memuat data…</span>
-      <div class="toolbar">
-        <input class="search-box" id="searchBox" type="text" placeholder="Cari nama atau batch…">
-        <button type="button" class="filter-btn" id="filterBtn" aria-haspopup="dialog">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg>
-          <span id="filterLabel">Filter</span>
-        </button>
-      </div>
+      <input class="search-box" id="searchBox" type="text" placeholder="Cari nama atau batch…">
     </div>
     <div class="home-layout">
       <aside class="group-sidebar" id="groupSidebar">
@@ -515,16 +433,6 @@
     </div>
   </section>
 
-</div>
-
-<div class="sheet-overlay" id="sheetOverlay"></div>
-<div class="sheet" id="groupSheet" role="dialog" aria-label="Filter Small Group">
-  <div class="sheet-handle"></div>
-  <div class="sheet-head">
-    <h3 class="sheet-title">Small Group</h3>
-    <button type="button" class="sheet-close" id="sheetClose">Tutup</button>
-  </div>
-  <div class="sheet-body" id="sheetBody"></div>
 </div>
 
 <footer>Made by <br><a href="https://www.instagram.com/assistby.rjw/" target="_blank">assistby.rjw</a></footer>
@@ -780,64 +688,13 @@ function buildGroupSidebar(){
   });
 }
 
-/* Pilih Small Group (dipakai sidebar desktop & bottom sheet mobile) */
-const filterBtn = document.getElementById("filterBtn");
-const filterLabel = document.getElementById("filterLabel");
-const sheetBody = document.getElementById("sheetBody");
-
-function setActiveGroup(g){
-  activeGroup = g;
-  document.querySelectorAll(".group-btn, .sheet-chip").forEach(b=>{
-    b.classList.toggle("active", b.dataset.group === activeGroup);
-  });
-  filterBtn.classList.toggle("on", !!activeGroup);
-  filterLabel.textContent = activeGroup ? activeGroup.replace(/^Small Group\s*-\s*/i, "") : "Filter";
-  applyFilters();
-}
-
 groupSidebar.addEventListener("click", (e)=>{
   const btn = e.target.closest(".group-btn");
   if(!btn) return;
-  setActiveGroup(btn.dataset.group);
-});
-
-/* Bottom sheet: Small Group dikelompokkan per nama (Alfred 1-4, April 1-4, dst) */
-function buildGroupSheet(){
-  const groups = [...new Set(
-    allStudents.map(s => getSmallGroup(s)).filter(Boolean)
-  )].sort((a,b)=>a.localeCompare(b, undefined, {numeric:true}));
-
-  const byName = {};
-  groups.forEach(g=>{
-    const m = g.replace(/^Small Group\s*-\s*/i, "").match(/^(.*?)\s+(\d+)$/);
-    const name = m ? m[1] : "Lainnya";
-    const label = m ? m[2] : g;
-    (byName[name] = byName[name] || []).push({g, label});
-  });
-
-  const chip = (g, label) =>
-    `<button type="button" class="sheet-chip${g===activeGroup?" active":""}" data-group="${escapeHtml(g)}">${escapeHtml(label)}</button>`;
-
-  sheetBody.innerHTML =
-    `<div class="sheet-row"><div class="sheet-chips">${chip("", "Semua student")}</div></div>` +
-    Object.keys(byName).map(name =>
-      `<div class="sheet-row"><div class="sheet-name">${escapeHtml(name)}</div><div class="sheet-chips">${
-        byName[name].map(x => chip(x.g, x.label)).join("")
-      }</div></div>`
-    ).join("");
-}
-
-function openSheet(){ document.body.classList.add("sheet-open"); }
-function closeSheet(){ document.body.classList.remove("sheet-open"); }
-filterBtn.addEventListener("click", openSheet);
-document.getElementById("sheetClose").addEventListener("click", closeSheet);
-document.getElementById("sheetOverlay").addEventListener("click", closeSheet);
-document.addEventListener("keydown", e=>{ if(e.key === "Escape") closeSheet(); });
-sheetBody.addEventListener("click", (e)=>{
-  const btn = e.target.closest(".sheet-chip");
-  if(!btn) return;
-  setActiveGroup(btn.dataset.group);
-  closeSheet();
+  activeGroup = btn.dataset.group;
+  groupSidebar.querySelectorAll(".group-btn").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+  applyFilters();
 });
 
 async function loadRoster(){
@@ -848,7 +705,6 @@ async function loadRoster(){
     allStudents = Array.isArray(data) ? data : [];
     rosterCount.textContent = `${allStudents.length} student terdaftar`;
     buildGroupSidebar();
-    buildGroupSheet();
     applyFilters();
   }catch(err){
     rosterCount.textContent = "Gagal memuat data";
